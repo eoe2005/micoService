@@ -39,3 +39,9 @@ Python微服务框架
     d = c.apiSend('AppName',[1])
     向 AppName 服务发送请求，参数是 [1] 返回结果是JSON解析后的对象
     
+# 交流
+QQ:253598835
+
+TEL:15911185633
+
+微信：eoe2005
