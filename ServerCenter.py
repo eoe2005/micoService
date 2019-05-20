@@ -18,6 +18,7 @@ class Server:
         self.queue = queue.Queue(1024)
         self.checkPing()
         threading.Thread(target=self.udp).start()
+        self.tcp()
 
 
     def udp(self):
@@ -70,13 +71,14 @@ class Server:
             events = self.sel.select()
             for key,mask in events:
                 func = key.data
-                func(key.fileObj,mask)
+                func(key.fileobj,mask)
 
     def accept(self,sock:socket.socket,mask):
         con,addr = sock.accept()
         self.cons[con] = addr
         data = json.dumps(self.apps)
         con.send(data.encode('utf8'))
+        print("发送配置信息")
         self.sel.register(con,selectors.EVENT_READ,self.read)
 
     def read(self,sock:socket.socket,mask):
